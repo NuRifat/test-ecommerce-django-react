@@ -1,8 +1,31 @@
-from django.http import JsonResponse
+from rest_framework.views import APIView
+from rest_framework.response import Response
+from rest_framework import status
 
-# Create your views here.
-def home(request):
-    data ={
-        'message': "Welcome to Ecommerce Store"
-    }
-    return JsonResponse(data)
+from .models import Product, Category
+from .serializers import ProductSerializer, CategorySerializer
+
+
+class ProductListView(APIView):
+
+    def get(self, request):
+        products = Product.objects.all()
+        serializer = ProductSerializer(products, many=True)
+
+        return Response(serializer.data)
+
+class ProductDetailView(APIView):
+
+    def get(self, request, pk):
+        product = Product.objects.get(id=pk)
+        serializer = ProductSerializer(product)
+
+        return Response(serializer.data)
+
+class CategoryListView(APIView):
+
+    def get(self, request):
+        categories = Category.objects.all()
+        serializer = CategorySerializer(categories, many=True)
+
+        return Response(serializer.data)

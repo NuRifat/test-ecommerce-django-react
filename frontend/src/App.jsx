@@ -1,21 +1,17 @@
-import React, { useEffect, useState } from 'react';
+import { BrowserRouter, Routes, Route } from "react-router-dom";
+import Navbar from "./components/Navbar";
+import Home from "./pages/Home";
 
-const App = () => {
-  const [message, setMessage] = useState('');
-
-  useEffect(() =>{
-    fetch('http://127.0.0.1:8000/api')
-    .then(response => response.json())
-    .then(data => setMessage(data.message))
-    .catch(error => console.error('Error msg:',error));
-  }, []);
-
+function App() {
   return (
-    <div>
-      <h1>Message from backend</h1>
-      <p>{message}</p>
-    </div>
+    <BrowserRouter>
+      <Navbar />
+
+      <Routes>
+        <Route path="/" element={<Home />} />
+      </Routes>
+    </BrowserRouter>
   );
-};
+}
 
 export default App;
