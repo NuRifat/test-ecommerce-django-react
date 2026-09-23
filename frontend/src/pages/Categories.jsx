@@ -1,15 +1,15 @@
 import { useEffect, useState } from "react";
 import { Link } from "react-router-dom";
+import api from "../services/api";
 
 function Categories() {
   const [categories, setCategories] = useState([]);
 
   useEffect(() => {
-    fetch("http://127.0.0.1:8000/api/categories/")
-      .then((response) => response.json())
-      .then((data) => {
-        setCategories(data);
-      });
+    api.get("/api/categories/")
+    .then((response) => {
+      setCategories(response.data);
+    });
   }, []);
 
   const parentCategories = categories.filter(

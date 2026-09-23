@@ -1,12 +1,13 @@
 import { Link } from "react-router-dom";
 
 function ProductCard({ product }) {
+  const API_BASE_URL = import.meta.env.VITE_API_BASE_URL;
   return (
     <div className="group overflow-hidden rounded-2xl border border-gray-200 bg-white transition duration-300 hover:-translate-y-1 hover:shadow-xl">
 
       <div className="aspect-square overflow-hidden bg-gray-100">
         <img
-          src={`http://127.0.0.1:8000${product.image}`}
+          src={`${API_BASE_URL}${product.image}`}
           alt={product.name}
           className="h-full w-full object-cover transition duration-500 group-hover:scale-105"
         />

@@ -5,6 +5,7 @@ import Products from "./pages/Products";
 import ProductDetails from "./pages/ProductDetails";
 import Categories from "./pages/Categories";
 import CategoryProducts from "./pages/CategoryProducts";
+import Footer from "./components/Footer";
 
 function App() {
   return (
@@ -18,6 +19,8 @@ function App() {
         <Route path="/categories" element={<Categories />} />
         <Route path="/categories/:id" element={<CategoryProducts />} />
       </Routes>
+
+      <Footer />
     </BrowserRouter>
   );
 }

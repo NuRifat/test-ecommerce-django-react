@@ -11,15 +11,13 @@ class ProductListView(APIView):
     def get(self, request):
         products = Product.objects.all()
         serializer = ProductSerializer(products, many=True)
-
         return Response(serializer.data)
 
 class ProductDetailView(APIView):
 
     def get(self, request, pk):
         product = Product.objects.get(id=pk)
-        serializer = ProductSerializer(product)
-
+        serializer = ProductSerializer(product, context={'request': request})
         return Response(serializer.data)
 
 class CategoryListView(APIView):
@@ -27,7 +25,6 @@ class CategoryListView(APIView):
     def get(self, request):
         categories = Category.objects.all()
         serializer = CategorySerializer(categories, many=True)
-
         return Response(serializer.data)
 
 class CategoryProductsView(APIView):
@@ -38,5 +35,4 @@ class CategoryProductsView(APIView):
             category__parent=category
         )
         serializer = ProductSerializer(products, many=True)
-
         return Response(serializer.data)

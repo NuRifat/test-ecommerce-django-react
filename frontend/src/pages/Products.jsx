@@ -1,15 +1,16 @@
 import { useEffect, useState } from "react";
 import ProductCard from "../components/ProductCard";
+import api from "../services/api";
 
 function Products() {
   const [products, setProducts] = useState([]);
+  const API_BASE_URL = import.meta.env.VITE_API_BASE_URL;
 
   useEffect(() => {
-    fetch("http://127.0.0.1:8000/api/products/")
-      .then((response) => response.json())
-      .then((data) => {
-        setProducts(data);
-      });
+    api.get("/api/products/")
+    .then((response) => {
+      setProducts(response.data);
+    });
   }, []);
 
   return (

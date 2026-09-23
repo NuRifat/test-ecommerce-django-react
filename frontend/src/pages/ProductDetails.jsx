@@ -1,17 +1,18 @@
 import { useEffect, useState } from "react";
 import { Link, useParams } from "react-router-dom";
+import api from "../services/api";
 
 function ProductDetails() {
   const { id } = useParams();
 
   const [product, setProduct] = useState(null);
+  const API_BASE_URL = import.meta.env.VITE_API_BASE_URL;
 
   useEffect(() => {
-    fetch(`http://127.0.0.1:8000/api/products/${id}/`)
-      .then((response) => response.json())
-      .then((data) => {
-        setProduct(data);
-      });
+    api.get(`/api/products/${id}/`)
+    .then((response) => {
+      setProduct(response.data);
+    });
   }, [id]);
 
   if (!product) {
@@ -30,7 +31,7 @@ function ProductDetails() {
         {/* Product Image */}
         <div className="overflow-hidden rounded-3xl bg-gray-100">
           <img
-            src={`http://127.0.0.1:8000${product.image}`}
+            src={`${product.image}`}
             alt={product.name}
             className="h-full w-full object-cover"
           />
