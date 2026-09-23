@@ -29,3 +29,14 @@ class CategoryListView(APIView):
         serializer = CategorySerializer(categories, many=True)
 
         return Response(serializer.data)
+
+class CategoryProductsView(APIView):
+
+    def get(self, request, pk):
+        category = Category.objects.get(id=pk)
+        products = Product.objects.filter(
+            category__parent=category
+        )
+        serializer = ProductSerializer(products, many=True)
+
+        return Response(serializer.data)

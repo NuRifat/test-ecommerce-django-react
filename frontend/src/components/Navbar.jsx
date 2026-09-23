@@ -25,7 +25,7 @@ function Navbar() {
           </Link>
 
           <a
-            href="#categories"
+            href="/categories"
             className="text-sm font-medium text-gray-700 transition hover:text-indigo-600"
           >
             Categories
