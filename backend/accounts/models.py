@@ -35,7 +35,6 @@ class User(AbstractUser):
     ROLE_CHOICES = (
         ('customer', 'Customer'),
         ('seller', 'Seller'),
-        ('admin', 'Admin'),
     )
 
     email = models.EmailField(unique=True)
@@ -44,7 +43,7 @@ class User(AbstractUser):
         choices=ROLE_CHOICES,
         default='customer'
     )
-
+    is_seller_approved = models.BooleanField(default=False)
     username = None
 
     USERNAME_FIELD = 'email'
